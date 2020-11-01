@@ -1,6 +1,11 @@
 extern crate cfg_if;
 extern crate wasm_bindgen;
 
+use crate::request::Request;
+use crate::response::Response;
+
+mod request;
+mod response;
 mod utils;
 
 use cfg_if::cfg_if;
@@ -17,6 +22,11 @@ cfg_if! {
 }
 
 #[wasm_bindgen]
-pub fn greet() -> String {
-    "Hello, wasm-worker!".to_string()
+pub async fn http_handler(req: JsValue) -> Result<JsValue, JsValue> {
+    let req = req.into_serde::<Request>().map_err(|e| e.to_string())?;
+
+    let res = Response::from_str("Hello from Rust!");
+    let res = JsValue::from_serde(&res).map_err(|e| e.to_string())?;
+
+    Ok(res)
 }

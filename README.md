@@ -1,39 +1,76 @@
-# 👷‍♀️🦀🕸️ `rustwasm-worker-template`
+<div>
+  <!--
+    <div align="center" style="display: block; text-align: center;">
+      <img src="" height="120" width="120" />
+    </div>
+  -->
+  <h1 align="center">image-resizer-worker</h1>
+  <h4 align="center">👷🏻‍♂️ Cloudflare Worker to manipulate images files</h4>
+</div>
 
-A template for kick starting a Cloudflare worker project using
-[`wasm-pack`](https://github.com/rustwasm/wasm-pack).
+## Setup
 
-This template is designed for compiling Rust libraries into WebAssembly and
-publishing the resulting worker to Cloudflare's worker infrastructure.
+1. Clone this project locally
 
-## 🔋 Batteries Included
-
-* [`wasm-bindgen`](https://github.com/rustwasm/wasm-bindgen) for communicating
-  between WebAssembly and JavaScript.
-* [`console_error_panic_hook`](https://github.com/rustwasm/console_error_panic_hook)
-  for logging panic messages to the developer console.
-* [`wee_alloc`](https://github.com/rustwasm/wee_alloc), an allocator optimized
-  for small code size.
-
-## 🚴 Usage
-
-### 🐑 Use `wrangler generate` to Clone this Template
-
-[Learn more about `wrangler generate` here.](https://github.com/cloudflare/wrangler)
-
-```
-wrangler generate wasm-worker  https://github.com/cloudflare/rustwasm-worker-template.git
-cd wasm-worker
+```bash
+git clone git@github.com:EstebanBorai/image-resizer-worker.git
 ```
 
-### 🛠️ Build with `wasm-pack build`
+2. Create a `wrangler.toml` file in the root directory of this repository
+and paste the following contents:
+
+```toml
+name = "<worker name>"
+type = "rust"
+
+account_id = "<enter your account id>"
+workers_dev = true
+route = ""
+zone_id = ""
+```
+
+3. Install `wrangler` CLI either with NPM or Cargo.
+
+```bash
+# npm
+npm install -g @cloudflare/wrangler
+
+# cargo
+cargo install wrangler
+```
+
+4. Find your API Token and configure it
+
+```bash
+wrangler config
+```
+
+This command will print the following:
 
 ```
-wasm-pack build
+ ╭──────────────────────────────────────────────────────────────────────────────────────────────────────╮
+ │                                                                                                      │
+ │             To find your API Token, go to https://dash.cloudflare.com/profile/api-tokens             │
+ │                     and create it using the "Edit Cloudflare Workers" template.                      │
+ │                                                                                                      │
+ │      Consider using `wrangler login` which only requires your Cloudflare username and password.      │
+ │                                                                                                      │
+ │                 If you are trying to use your Global API Key instead of an API Token                 │
+ │                         (Not Recommended), run `wrangler config --api-key`.                          │
+ │                                                                                                      │
+ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Enter API Token:
 ```
 
-### 🔬 Test in Headless Browsers with `wasm-pack test`
+Paste your API token, and press _Enter_.
 
+> Your API token must have access to edit workers
+
+5. Publish your worker to your account
+
+```bash
+wrangler publish
 ```
-wasm-pack test --headless --firefox
-```
+
+6. Find your worker on the web via: `https://<worker name>.<your workers sub domain>.workers.dev`
