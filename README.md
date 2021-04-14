@@ -57,27 +57,9 @@ cargo install wrangler
 wrangler config
 ```
 
-This command will print the following:
-
-```
- ╭──────────────────────────────────────────────────────────────────────────────────────────────────────╮
- │                                                                                                      │
- │             To find your API Token, go to https://dash.cloudflare.com/profile/api-tokens             │
- │                     and create it using the "Edit Cloudflare Workers" template.                      │
- │                                                                                                      │
- │      Consider using `wrangler login` which only requires your Cloudflare username and password.      │
- │                                                                                                      │
- │                 If you are trying to use your Global API Key instead of an API Token                 │
- │                         (Not Recommended), run `wrangler config --api-key`.                          │
- │                                                                                                      │
- ╰──────────────────────────────────────────────────────────────────────────────────────────────────────╯
-
-Enter API Token:
-```
-
 Paste your API token, and press _Enter_.
 
-> Your API token must have access to edit workers
+> Your API token should have access to edit workers
 
 5. Publish your worker to your account
 
