@@ -1,5 +1,3 @@
-const { bootstrap, handle_request } = wasm_bindgen;
-
 addEventListener('fetch', event => {
   event.respondWith(handleRequest(event.request))
 })
@@ -24,6 +22,8 @@ async function parseRequestBody(request, headers) {
 
 async function handleRequest(req) {
   try {
+    const { bootstrap, handle_request } = wasm_bindgen;
+
     // Initialize WASM Bindgen
     await wasm_bindgen(wasm);
 
