@@ -1,4 +1,5 @@
 use anyhow::{Context, Error, Result};
+use async_trait::async_trait;
 use http::{header::HeaderMap, StatusCode};
 use http::{Method, Request, Response, Uri};
 use serde::{Deserialize, Serialize};
@@ -7,6 +8,18 @@ use std::convert::TryFrom;
 use std::str::FromStr;
 use url::{Position, Url};
 use wasm_bindgen::JsValue;
+
+#[async_trait]
+pub trait Application {
+    type RequestBody;
+    type ResponseBody;
+
+    fn new() -> Self;
+    async fn handle(
+        &self,
+        request: Request<Self::RequestBody>,
+    ) -> Result<Response<Self::ResponseBody>>;
+}
 
 #[derive(Debug, Deserialize)]
 pub struct JsonHttpRequestValue<T> {
