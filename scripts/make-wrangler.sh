@@ -1,7 +1,7 @@
 #!/bin/bash
 
 WORKER_NAME="rusty-cloudflare-worker"
-CF_ACCOUNT_ID="99wf09f54cc02934241e72c309104ef0"
+CF_ACCOUNT_ID="<Provide your Account ID from Cloudflare Workers Website>"
 WORKERS_DEV=true
 
 if [[ $1 == "prod" ]] ; then

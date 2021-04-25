@@ -6,6 +6,10 @@
   <h4 align="center">👷🏻‍♂️ Rust Cloudflare Worker to handle HTTP requests</h4>
 </div>
 
+<div align="center">
+  <img src="./assets/screenshot.png" width="700" />
+</div>
+
 ## Motivation
 
 The Rusty Cloudflare Worker is an template project to have a Cloudflare worker
@@ -67,6 +71,37 @@ git push origin main --follow-tags
 ```
 
 If nothing is changed in the `deploy` workflow, this should trigger a deploy.
+
+## Scripts
+
+Some scripts are available to help you in your workflow. These scripts are
+available in the `scripts/` directory.
+
+Filename | Description
+--- | ---
+`build.sh` | Runs `@cloudflare/wrangler build` to build your worker
+`make-wrangler.sh` | Creates a `wrangler.toml` file
+`publish.sh` | Publishes your worker using `@cloudflare/wrangler publish`. You must provide: `CF_EMAIL` with your cloudflare account email and `CF_API_KEY` with your Global API Key. Refer to: https://developers.cloudflare.com/workers/cli-wrangler/authentication#using-environment-variables for more details in case you want to change this behavior.
+`wrangler-dev.sh` | Runs your worker locally. You must provide the Account ID to the `wrangler.toml` file
+`wrangler-preview.sh` | Uploads your worker to a preview environment with tools for debugging.
+
+## Considerations
+
+### Wrangler Dev
+
+If you run the `scripts/wrangler-dev.sh` file you will have an `ACCOUNT_ID` to
+the `wrangler.toml`.
+
+Otherwise you will get:
+
+```sh
+$ scripts/wrangler-dev.sh
+
+🕵️  You can find your account_id in the right sidebar of your account's Workers page
+Error: field `account_id` is required to deploy to workers.dev
+```
+
+As a workaround you can always use `scripts/wrangler-preview.sh` instead.
 
 ## Contributions
 
